@@ -1,22 +1,27 @@
-let videoOne = document.querySelector('video');
-let buttonOne = document.querySelector('button');
+function MediaPLayer(config){
+    this.media = config.el;
+}
 
-class mediaPlayer {
-    
-    constructor(config) {
-        this.media = config.el;
-    }
-    play() {
-        this.media.play();
-        // recurso : 
+MediaPLayer.prototype.play= function(){
+    this.media.play();
+}
+
+MediaPLayer.prototype.pause= function(){
+    this.media.pause();
+}
+
+MediaPLayer.prototype.togglePlay= function(){
+    if(this.media.paused){
+        this.play();    
+    }else{
+        this.pause();
     }
 }
 
+const video = document.querySelector('video');
+const player = new MediaPLayer({el:video});
+const button = document.querySelector('button');
 
-            // instancia
-const player = new mediaPlayer({el:videoOne});
+button.onclick = () => player.togglePlay();
 
-// evento click
-buttonOne.onclick = () => {
-    player.play();
-}
+
